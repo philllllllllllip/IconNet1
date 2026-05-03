@@ -25,4 +25,4 @@ IconNet is a browser-based collectible game where players unlock icon blocks, op
 
 ## Status
 
-Currently in active development. Stay tuned for a public release.
+Currently in active development. Stay tuned for a public release. Join our Discord!
