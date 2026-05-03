@@ -88,7 +88,7 @@ function draw() {
     <div className="relative w-full h-screen bg-black text-white overflow-hidden flex flex-col">
       <canvas id="particles" className="absolute inset-0 pointer-events-none" />
 
-      {/* Navbar */}
+      {/* Navbar (prolly might chnage later aswell */}
       <div className="flex justify-between items-center px-8 py-4 z-20 relative">
         <h1 className="navbar-title">ICONNET</h1>
 <div className="flex gap-4">
@@ -97,7 +97,7 @@ function draw() {
         </div>
       </div>
 
-      {/* Hero */}
+      {/* Hero thing title*/}
       <div className="flex-1 flex flex-col items-center justify-center text-center z-10 relative">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -117,7 +117,7 @@ function draw() {
         </button>
       </div>
 
-      {/* Bottom Left - Typing Effect */}
+      {/* Bottom Left - Typing Effect (not in use i dont think currently add later */}
       <div className="absolute bottom-4 left-8 z-20">
         <p className="bottom-title">{title}{showCursor && <span className="cursor">|</span>}</p>
       </div>
