@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 interface UserStats {
   tokens: number;
-  blocksUnlocked: number;
-  blocksTotal: number;
+  iconsUnlocked: number;
+  iconsTotal: number;
   packsOpened: number;
   messagesSent: number;
 }
@@ -23,10 +23,10 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const API_URL = 'http://localhost:5000/api/auth';
 
-const defaultStats: UserStats = {
+  const defaultStats: UserStats = {
   tokens: 0,
-  blocksUnlocked: 0,
-  blocksTotal: 417,
+  iconsUnlocked: 0,
+  iconsTotal: 417,
   packsOpened: 0,
   messagesSent: 0
 };
@@ -101,7 +101,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     if (!res.ok) {
       const data = await res.json();
-      throw new Error(data.error || 'Signup failed');
+      throw new Error(data.error || 'Signup failed. Please check the Disocrd for help.');
     }
     
     const data = await res.json();
