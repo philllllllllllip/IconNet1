@@ -26,8 +26,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true, minlength: 6 },
   role: { type: String, default: 'Player' },
   tokens: { type: Number, default: 0 },
-  blocksUnlocked: { type: Number, default: 0 },
-  blocksTotal: { type: Number, default: 417 },
+iconsUnlocked: { type: Number, default: 0 },
+  iconsTotal: { type: Number, default: 417 },
   packsOpened: { type: Number, default: 0 },
   messagesSent: { type: Number, default: 0 },
   friends: [{ type: String }],
@@ -73,8 +73,8 @@ app.post('/api/auth/signup', async (req, res) => {
       password: hashedPassword,
       role: 'Player',
       tokens: 0,
-      blocksUnlocked: 0,
-      blocksTotal: 417,
+      iconsUnlocked: 0,
+      iconsTotal: 417,
       packsOpened: 0,
       messagesSent: 0,
       friends: [],
@@ -92,8 +92,8 @@ app.post('/api/auth/signup', async (req, res) => {
       role: user.role,
       stats: {
         tokens: user.tokens,
-        blocksUnlocked: user.blocksUnlocked,
-        blocksTotal: user.blocksTotal,
+        iconsUnlocked: user.iconsUnlocked,
+        iconsTotal: user.iconsTotal,
         packsOpened: user.packsOpened,
         messagesSent: user.messagesSent
       },
@@ -138,8 +138,8 @@ app.post('/api/auth/login', async (req, res) => {
       role: user.role,
       stats: {
         tokens: user.tokens,
-        blocksUnlocked: user.blocksUnlocked,
-        blocksTotal: user.blocksTotal,
+        iconsUnlocked: user.iconsUnlocked,
+        iconsTotal: user.iconsTotal,
         packsOpened: user.packsOpened,
         messagesSent: user.messagesSent
       },
@@ -168,8 +168,8 @@ app.get('/api/auth/me', async (req, res) => {
       role: user.role || 'Player',
       stats: {
         tokens: user.tokens ?? 0,
-        blocksUnlocked: user.blocksUnlocked ?? 0,
-        blocksTotal: user.blocksTotal ?? 417,
+        iconsUnlocked: user.iconsUnlocked ?? 0,
+        iconsTotal: user.iconsTotal ?? 417,
         packsOpened: user.packsOpened ?? 0,
         messagesSent: user.messagesSent ?? 0
       },
