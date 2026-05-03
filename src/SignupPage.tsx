@@ -8,6 +8,8 @@ const SignupPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -125,7 +127,6 @@ function draw() {
     <div className="relative w-full h-screen bg-black text-white overflow-hidden flex flex-col">
       <canvas id="particles" className="absolute inset-0 pointer-events-none" />
 
-      {/* Navbar */}
       <div className="flex justify-between items-center px-8 py-4 z-20 relative">
         <h1 className="navbar-title">ICONNET</h1>
         <div className="flex gap-4">
@@ -134,7 +135,6 @@ function draw() {
         </div>
       </div>
 
-      {/* Hero */}
       <div className="flex-1 flex flex-col items-center justify-center text-center z-10 relative">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -171,24 +171,42 @@ function draw() {
             className="auth-input"
           />
           
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-            minLength={6}
-            className="auth-input"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+              minLength={6}
+              className="auth-input pr-10"
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+            </button>
+          </div>
           
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm Password"
-            required
-            className="auth-input"
-          />
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm Password"
+              required
+              className="auth-input pr-10"
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+            </button>
+          </div>
           
           {error && (
             <p className="auth-error" style={{ textAlign: 'center' }}>{error}</p>
@@ -200,7 +218,7 @@ function draw() {
             disabled={loading}
             style={{ marginTop: '1rem' }}
           >
-            {loading ? 'Creating account...' : 'Sign Up'}
+            {loading ? 'Creating account... ' : 'Sign Up'}
           </button>
         </motion.form>
 
@@ -215,7 +233,6 @@ function draw() {
         </motion.p>
       </div>
 
-      {/* Bottom Left */}
       <div className="absolute bottom-4 left-8 z-20">
         <p className="bottom-title">{title}{showCursor && <span className="cursor">|</span>}</p>
       </div>
