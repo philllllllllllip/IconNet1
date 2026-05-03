@@ -6,7 +6,7 @@ const DashboardPage: React.FC = () => {
 
   const statsList = [
     { label: 'Coins', value: stats.tokens.toLocaleString() },
-    { label: 'Icons', value: `${stats.blocksUnlocked.toLocaleString()} / ${stats.blocksTotal.toLocaleString()}` },
+{ label: 'Icons', value: `${stats.iconsUnlocked.toLocaleString()} / ${stats.iconsTotal.toLocaleString()}` },
     { label: 'Crates', value: stats.packsOpened.toLocaleString() },
     { label: 'Messages', value: stats.messagesSent.toLocaleString() }
   ];
@@ -31,8 +31,8 @@ const DashboardPage: React.FC = () => {
       <section className="stats-card">
         <div className="stats-header">
           <div>
-            <h2>Stats</h2>
-            <p>All your key account figures in one place.</p>
+            <h2>Dashboard</h2>
+            <p>Account Stats, Frients, and Profile.</p>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ const DashboardPage: React.FC = () => {
 
         <div className="friends-body">
           {friends.length === 0 ? (
-            <div className="empty-state">No friends yet. Seed your database to populate friends.</div>
+            <div className="empty-state">No friends yet. Add people in Community Page.</div>
           ) : (
             friends.map((friend) => (
               <div key={friend} className="friend-item">{friend}</div>
