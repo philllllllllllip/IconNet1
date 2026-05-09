@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useAuth } from './AuthContext';
 
 const DashboardPage: React.FC = () => {
@@ -6,12 +6,10 @@ const DashboardPage: React.FC = () => {
 
   const statsList = [
     { label: 'Coins', value: stats.tokens.toLocaleString() },
-{ label: 'Icons', value: `${stats.iconsUnlocked.toLocaleString()} / ${stats.iconsTotal.toLocaleString()}` },
+    { label: 'Icons', value: `${stats.iconsUnlocked.toLocaleString()} / ${stats.iconsTotal.toLocaleString()}` },
     { label: 'Crates', value: stats.packsOpened.toLocaleString() },
     { label: 'Messages', value: stats.messagesSent.toLocaleString() }
   ];
-
-  const friends: string[] = [];
 
   return (
     <div className="dashboard-shell">
@@ -31,8 +29,8 @@ const DashboardPage: React.FC = () => {
       <section className="stats-card">
         <div className="stats-header">
           <div>
-            <h2>Dashboard</h2>
-            <p>Account Stats, Frients, and Profile.</p>
+            <h2>Account Summary</h2>
+            <p>Key account metrics and progress.</p>
           </div>
         </div>
 
@@ -43,23 +41,6 @@ const DashboardPage: React.FC = () => {
               <strong>{stat.value}</strong>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="friends-card">
-        <div className="friends-header">
-          <h2>Friends</h2>
-          <span>0 friends</span>
-        </div>
-
-        <div className="friends-body">
-          {friends.length === 0 ? (
-            <div className="empty-state">No friends yet. Add people in Community Page.</div>
-          ) : (
-            friends.map((friend) => (
-              <div key={friend} className="friend-item">{friend}</div>
-            ))
-          )}
         </div>
       </section>
     </div>

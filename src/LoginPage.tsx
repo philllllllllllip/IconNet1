@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './index.css';
+import { useAuth } from './AuthContext';
 
 const LoginPage: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -10,6 +11,7 @@ const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   useEffect(() => {
     const text = 'IconNet.org';
@@ -45,7 +47,7 @@ const LoginPage: React.FC = () => {
       d: Math.random() * 1.2 + 0.3
     }));
 
-function draw() {
+    function draw() {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.shadowBlur = 8;
@@ -86,21 +88,9 @@ function draw() {
     e.preventDefault();
     setError('');
     setLoading(true);
-    
+
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
-      
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Login failed');
-      }
-      
-      const data = await res.json();
-      localStorage.setItem('token', data.token);
+      await login(username, password);
       window.location.href = '/dashboard';
     } catch (err: unknown) {
       const errMsg = err instanceof Error ? err.message : 'Login failed';
@@ -132,7 +122,7 @@ function draw() {
           Welcome Back
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           className="hero-description"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -141,7 +131,7 @@ function draw() {
           Login to IconNet
         </motion.p>
 
-<motion.form 
+        <motion.form
           onSubmit={handleSubmit}
           className="auth-form"
           initial={{ opacity: 0, y: 20 }}
@@ -156,10 +146,10 @@ function draw() {
             required
             className="auth-input"
           />
-          
+
           <div className="relative">
             <input
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -168,19 +158,19 @@ function draw() {
             />
             <button
               type="button"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+              className="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
             </button>
           </div>
-          
+
           {error && (
             <p className="auth-error" style={{ textAlign: 'center' }}>{error}</p>
           )}
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             className="extruded-btn"
             disabled={loading}
             style={{ marginTop: '1rem' }}
@@ -189,7 +179,7 @@ function draw() {
           </button>
         </motion.form>
 
-        <motion.p 
+        <motion.p
           className="hero-description"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

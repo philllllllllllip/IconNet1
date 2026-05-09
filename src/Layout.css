@@ -1,0 +1,13 @@
+.layout-root {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f23 0%, #1e1b4b 100%);
+}
+
+.layout-main {
+  margin-left: 250px;
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}

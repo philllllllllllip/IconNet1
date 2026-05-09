@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './index.css';
+import { useAuth } from './AuthContext';
 
 const SignupPage: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -12,6 +13,7 @@ const SignupPage: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
 
   useEffect(() => {
     const text = 'IconNet.org';
@@ -47,7 +49,7 @@ const SignupPage: React.FC = () => {
       d: Math.random() * 1.2 + 0.3
     }));
 
-function draw() {
+    function draw() {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.shadowBlur = 8;
@@ -99,21 +101,9 @@ function draw() {
     }
     
     setLoading(true);
-    
+
     try {
-      const res = await fetch('http://localhost:5000/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
-      
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Signup failed');
-      }
-      
-      const data = await res.json();
-      localStorage.setItem('token', data.token);
+      await signup(username, password);
       window.location.href = '/dashboard';
     } catch (err: unknown) {
       const errMsg = err instanceof Error ? err.message : 'Signup failed';
@@ -145,7 +135,7 @@ function draw() {
           Create Account
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           className="hero-description"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -154,7 +144,7 @@ function draw() {
           Join IconNet today
         </motion.p>
 
-<motion.form 
+        <motion.form
           onSubmit={handleSubmit}
           className="auth-form"
           initial={{ opacity: 0, y: 20 }}
@@ -170,10 +160,10 @@ function draw() {
             minLength={3}
             className="auth-input"
           />
-          
+
           <div className="relative">
             <input
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -183,16 +173,16 @@ function draw() {
             />
             <button
               type="button"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+              className="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
             </button>
           </div>
-          
+
           <div className="relative">
             <input
-              type={showConfirmPassword ? "text" : "password"}
+              type={showConfirmPassword ? 'text' : 'password'}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
@@ -201,13 +191,13 @@ function draw() {
             />
             <button
               type="button"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+              className="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
             </button>
           </div>
-          
+
           {error && (
             <p className="auth-error" style={{ textAlign: 'center' }}>{error}</p>
           )}
@@ -218,11 +208,11 @@ function draw() {
             disabled={loading}
             style={{ marginTop: '1rem' }}
           >
-            {loading ? 'Creating account... ' : 'Sign Up'}
+            {loading ? 'Creating account...' : 'Sign Up'}
           </button>
         </motion.form>
 
-        <motion.p 
+        <motion.p
           className="hero-description"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

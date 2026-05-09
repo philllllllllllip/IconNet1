@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './index.css';
 
@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
       d: Math.random() * 1.2 + 0.3
     }));
 
-function draw() {
+    function draw() {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.shadowBlur = 8;
@@ -88,16 +88,14 @@ function draw() {
     <div className="relative w-full h-screen bg-black text-white overflow-hidden flex flex-col">
       <canvas id="particles" className="absolute inset-0 pointer-events-none" />
 
-      {/* Navbar (prolly might chnage later aswell */}
       <div className="flex justify-between items-center px-8 py-4 z-20 relative">
-        <h1 className="navbar-title">ICONNET</h1>
-<div className="flex gap-4">
+        <h1 className="navbar-title">IconNet</h1>
+        <div className="flex gap-4">
           <a href="/login" className="extruded-btn"><i className="fas fa-user"></i> Login</a>
           <a href="/signup" className="extruded-btn"><i className="fas fa-pencil"></i> Register</a>
         </div>
       </div>
 
-      {/* Hero thing title*/}
       <div className="flex-1 flex flex-col items-center justify-center text-center z-10 relative">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -105,11 +103,11 @@ function draw() {
           transition={{ duration: 0.6 }}
           className="hero-title"
         >
-          ICONNET
+          IconNet
         </motion.h1>
 
         <p className="hero-description">
-          Newest Online Trading and Icon Collecting Game Developed in TypeScript.
+           Online Trading and Icon Collecting Game Developed in TypeScript.
         </p>
 
         <button className="extruded-btn" onClick={handleStartGame}>
@@ -117,7 +115,6 @@ function draw() {
         </button>
       </div>
 
-      {/* Bottom Left - Typing Effect (not in use i dont think currently add later */}
       <div className="absolute bottom-4 left-8 z-20">
         <p className="bottom-title">{title}{showCursor && <span className="cursor">|</span>}</p>
       </div>
