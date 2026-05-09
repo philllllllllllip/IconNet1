@@ -28,7 +28,7 @@ IconNet is a browser-based collectible game where players unlock icon blocks, op
 | Role | Name |
 |---|---|
 | Owner | DragonCommanderYT |
-| Developers | ZackiBoiz, Fireball, Lemon |
+| Developers | SimpleDeerest, ZackiBoiz, Fireball, Lemon |
 
 ---
 
