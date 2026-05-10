@@ -1,5 +1,4 @@
 import React from 'react';
-import './Sidebar.css';
 
 interface SidebarProps {
   onNavigate: (path: string) => void;
@@ -17,6 +16,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
           <button className="sidebar-button" onClick={() => onNavigate('/dashboard')}>
             <i className="fas fa-tachometer-alt" />
             <span>Dashboard</span>
+          </button>
+          <button className="sidebar-button" onClick={() => onNavigate('/settings')}>
+            <i className="fas fa-cog" />
+            <span>Settings</span>
           </button>
         </nav>
       </div>

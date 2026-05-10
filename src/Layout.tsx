@@ -21,3 +21,11 @@ const Layout: React.FC<LayoutProps> = ({ children, onNavigate }) => {
 };
 
 export default Layout;
+
+const img = new Image();
+img.src = './images/dashboard_background.png';
+
+img.onload = () => {
+  document.documentElement.style.setProperty('--tile-w', img.width + 'px');
+  document.documentElement.style.setProperty('--tile-h', img.height + 'px');
+};

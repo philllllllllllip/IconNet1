@@ -174,7 +174,7 @@ const SignupPage: React.FC = () => {
       <canvas id="particles" className="absolute inset-0 pointer-events-none" />
 
       <div className="flex justify-between items-center px-8 py-4 z-20 relative">
-        <h1 className="navbar-title">ICONNET</h1>
+        <h1 className="navbar-title">IconNet</h1>
         <div className="flex gap-4">
           <a href="/" className="extruded-btn">Home</a>
           <a href="/login" className="extruded-btn">Login</a>

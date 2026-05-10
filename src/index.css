@@ -3,6 +3,13 @@
   src: url('./fonts/SuperComic-qZg62.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Abite';
+  src: url('./fonts/ABITE.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 * {
@@ -211,172 +218,7 @@ html, body, #root {
   padding: 0 1rem;
 }
 
-.dashboard-shell {
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
-.profile-card {
-  display: flex;
-  align-items: flex-end;
-  gap: 2rem;
-  background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #1e293b 100%);
-  border-radius: 2rem;
-  padding: 2.5rem 3rem;
-  margin-bottom: 3rem;
-  border: 1px solid #475569;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  position: relative;
-  overflow: hidden;
-}
-
-.profile-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
-}
-
-.profile-avatar-column {
-  flex-shrink: 0;
-}
-
-.profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 1.5rem;
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  display: grid;
-  place-items: center;
-  font-size: 2.75rem;
-  font-weight: 700;
-  color: #1e1b4b;
-  border: 4px solid rgba(251, 191, 36, 0.3);
-  box-shadow: 0 20px 40px rgba(251, 191, 36, 0.2);
-}
-
-.profile-banner-content {
-  flex: 1;
-}
-
-.banner-name {
-  font-size: 2.25rem;
-  font-weight: 800;
-  margin-bottom: 0.25rem;
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-}
-
-.banner-tag {
-  color: #94a3b8;
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
-}
-
-.banner-role {
-  color: #fbbf24;
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
-}
-
-.stats-card,
-.friends-card {
-  background: #1e1b4b;
-  border: 1px solid #475569;
-  border-radius: 1.75rem;
-  padding: 2.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-}
-
-.stats-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.stats-header h2 {
-  margin: 0;
-  font-size: 1.875rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.025em;
-}
-
-.stats-header p,
-.friends-header span {
-  color: #94a3b8;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-}
-
-.stat-value-card {
-  background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.1));
-  border: 1px solid rgba(251,191,36,0.2);
-  border-radius: 1.25rem;
-  padding: 1.75rem 2rem;
-  text-align: center;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-value-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #fbbf24, transparent);
-}
-
-.stat-value-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(251,191,36,0.15);
-}
-
-.stat-value-card span {
-  display: block;
-  color: #cbd5e1;
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.stat-value-card strong {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #f8fafc;
-  display: block;
-  line-height: 1;
-}
 
 .friends-header {
   display: flex;
@@ -438,22 +280,6 @@ html, body, #root {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
-  
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .profile-card {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-    gap: 1.5rem;
-  }
-  
-  .profile-avatar {
-    margin: 0 auto;
-  }
 }
 
 /* Password Toggle Button */
@@ -469,6 +295,42 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   padding: 0;
+}
+
+.notfound-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.notfound-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.notfound-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.notfound-page h1 {
+  font-family: 'Abite', sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  letter-spacing: 0.05em;
+  margin: 0;
 }
 
 .password-toggle:hover {

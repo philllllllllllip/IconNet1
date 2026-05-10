@@ -1,46 +1,39 @@
 ﻿import React from 'react';
 import { useAuth } from './AuthContext';
+import './DashboardPage.css';
 
 const DashboardPage: React.FC = () => {
   const { user, role, stats } = useAuth();
 
-  const statsList = [
-    { label: 'Coins', value: stats.tokens.toLocaleString() },
-    { label: 'Icons', value: `${stats.iconsUnlocked.toLocaleString()} / ${stats.iconsTotal.toLocaleString()}` },
-    { label: 'Crates', value: stats.packsOpened.toLocaleString() },
-    { label: 'Messages', value: stats.messagesSent.toLocaleString() }
+  const lineStats = [
+    { label: 'Coins', emoji: '🪙', value: stats.tokens.toLocaleString() },
+    { label: 'Icons', emoji: '🎨', value: `${stats.iconsUnlocked.toLocaleString()} / ${stats.iconsTotal.toLocaleString()}` }
   ];
 
   return (
-    <div className="dashboard-shell">
+    <div className="dashboard-content">
       <section className="profile-card">
-        <div className="profile-avatar-column">
+        <div className="profile-header">
           <div className="profile-avatar">{user?.charAt(0).toUpperCase() || 'P'}</div>
-        </div>
-        <div className="profile-banner">
-          <div className="profile-banner-content">
+          <div className="profile-details">
             <div className="banner-name">{user || 'Player'}</div>
             <div className="banner-tag">@{(user || 'player').toLowerCase()}</div>
             <div className="banner-role">{role || 'Player'}</div>
           </div>
         </div>
-      </section>
 
-      <section className="stats-card">
-        <div className="stats-header">
-          <div>
-            <h2>Account Summary</h2>
-            <p>Key account metrics and progress.</p>
+        <div className="account-stats">
+          <div className="stats-row">
+            {lineStats.map((stat) => (
+              <div key={stat.label} className="inline-stat-card">
+                <div className="stat-card-title">
+                  <span>{stat.emoji}</span>
+                  <span>{stat.label}</span>
+                </div>
+                <strong>{stat.value}</strong>
+              </div>
+            ))}
           </div>
-        </div>
-
-        <div className="stats-grid">
-          {statsList.map((stat) => (
-            <div key={stat.label} className="stat-value-card">
-              <span>{stat.label}</span>
-              <strong>{stat.value}</strong>
-            </div>
-          ))}
         </div>
       </section>
     </div>
@@ -48,3 +41,4 @@ const DashboardPage: React.FC = () => {
 };
 
 export default DashboardPage;
+

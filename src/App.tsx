@@ -3,6 +3,8 @@ import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
 import DashboardPage from './DashboardPage';
+import SettingsPage from './SettingsPage';
+import NotFoundPage from './NotFoundPage';
 import Layout from './Layout';
 import { useAuth } from './AuthContext';
 
@@ -52,7 +54,23 @@ const App: React.FC = () => {
     );
   }
 
-  return <HomePage />;
+  if (path === '/settings') {
+    if (!user) {
+      window.location.pathname = '/login';
+      return null;
+    }
+    return (
+      <Layout onNavigate={handleNavigate}>
+        <SettingsPage />
+      </Layout>
+    );
+  }
+
+  if (path === '/' || path === '') {
+    return <HomePage />;
+  }
+
+  return <NotFoundPage />;
 };
 
 export default App;
