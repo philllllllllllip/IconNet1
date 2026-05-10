@@ -21,7 +21,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const API_URL = '/api/auth';
+const API_URL = (typeof process !== 'undefined' ? process.env.REACT_APP_API_URL : undefined) || 'http://localhost:5000/api/auth';
 
 const defaultStats: UserStats = {
   tokens: 0,
@@ -59,7 +59,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             setRole(null);
             setStats(defaultStats);
           }
-        } catch {
+        } catch (err) {
+          console.error('Auth check failed:', err);
           localStorage.removeItem('token');
           setToken(null);
           setUser(null);
@@ -80,8 +81,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
 
     if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.error || 'Login failed');
+      const text = await res.text();
+      try {
+        const data = JSON.parse(text);
+        throw new Error(data.error || 'Login failed');
+      } catch (parseErr) {
+        throw new Error(`Server error: ${text || 'No response'}`);
+      }
     }
 
     const data = await res.json();
@@ -100,8 +106,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
 
     if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.error || 'Signup failed');
+      const text = await res.text();
+      try {
+        const data = JSON.parse(text);
+        throw new Error(data.error || 'Signup failed');
+      } catch (parseErr) {
+        throw new Error(`Server error: ${text || 'No response'}`);
+      }
     }
 
     const data = await res.json();

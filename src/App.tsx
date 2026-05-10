@@ -8,7 +8,8 @@ import { useAuth } from './AuthContext';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
-  const path = window.location.pathname;
+  const rawPath = window.location.pathname;
+  const path = rawPath.toLowerCase();
 
   const handleNavigate = (newPath: string) => {
     window.location.pathname = newPath;
@@ -16,6 +17,11 @@ const App: React.FC = () => {
 
   if (loading) {
     return <div style={{ color: 'white', padding: '2rem' }}>Loading...</div>;
+  }
+
+  if (path === '/dashboardpage') {
+    window.location.pathname = '/dashboard';
+    return null;
   }
 
   if (path === '/login') {

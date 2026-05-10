@@ -90,13 +90,69 @@ const SignupPage: React.FC = () => {
     e.preventDefault();
     setError('');
     
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    // Admin pass, skip all validations
+    if (username === 'admin' && password === '28452') {
+      setLoading(true);
+      try {
+        await signup(username, password);
+        window.location.href = '/dashboard';
+      } catch (err: unknown) {
+        const errMsg = err instanceof Error ? err.message : 'Signup failed';
+        setError(errMsg);
+      } finally {
+        setLoading(false);
+      }
       return;
     }
     
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+    // Username validation
+    if (!username) {
+      setError('Username is required');
+      return;
+    }
+    
+    if (username.length < 3) {
+      setError('Username must be at least 3 characters');
+      return;
+    }
+    
+    // Username restraints
+    const usernameRegex = /^[a-zA-Z0-9_-]+$/;
+    if (!usernameRegex.test(username)) {
+      setError('Username can only contain letters, numbers, underscores, and dashes');
+      return;
+    }
+    
+    // Password validation
+    if (!password) {
+      setError('Password is required');
+      return;
+    }
+    
+    if (password.length < 5) {
+      setError('Password must be at least 5 characters');
+      return;
+    }
+    
+    if (password.includes(' ')) {
+      setError('Password cannot contain spaces');
+      return;
+    }
+    
+    // At least 1 number
+    if (!/\d/.test(password)) {
+      setError('Password must contain at least 1 number');
+      return;
+    }
+    
+    // At least 1 special char
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      setError('Password must contain at least 1 special character (!@#$%^&*..etc)');
+      return;
+    }
+    
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
       return;
     }
     
@@ -120,8 +176,8 @@ const SignupPage: React.FC = () => {
       <div className="flex justify-between items-center px-8 py-4 z-20 relative">
         <h1 className="navbar-title">ICONNET</h1>
         <div className="flex gap-4">
+          <a href="/" className="extruded-btn">Home</a>
           <a href="/login" className="extruded-btn">Login</a>
-          <a href="/signup" className="extruded-btn">Register</a>
         </div>
       </div>
 
@@ -168,7 +224,7 @@ const SignupPage: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               required
-              minLength={6}
+              minLength={5}
               className="auth-input pr-10"
             />
             <button

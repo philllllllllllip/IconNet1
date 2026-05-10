@@ -107,7 +107,7 @@ const LoginPage: React.FC = () => {
       <div className="flex justify-between items-center px-8 py-4 z-20 relative">
         <h1 className="navbar-title">ICONNET</h1>
         <div className="flex gap-4">
-          <a href="/login" className="extruded-btn">Login</a>
+          <a href="/" className="extruded-btn">Home</a>
           <a href="/signup" className="extruded-btn">Register</a>
         </div>
       </div>
