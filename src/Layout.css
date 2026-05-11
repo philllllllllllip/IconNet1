@@ -1,53 +1,49 @@
 .layout-root {
   position: relative;
-  display: flex;
   min-height: 100vh;
   background-color: #000;
   overflow: hidden;
+  display: flex;
+  align-items: flex-start;
 }
 
-:root {
-  --scroll-duration: 120s;
-}
-
-.layout-root::before {
-  content: '';
+.space-particles {
   position: absolute;
-  inset: -2000px;
-  background-image: url('./images/dashboard_background.png');
-  background-repeat: repeat;
-  background-size: auto;
-  --tile-w: 0px;
-  --tile-h: 0px;
-  animation: dashboardBackgroundMove var(--scroll-duration) linear infinite;
-  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  will-change: background-position;
+  z-index: 0;
 }
 
-@keyframes dashboardBackgroundMove {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-.layout-root > * {
+.layout-root > *:not(.space-particles) {
   position: relative;
   z-index: 1;
 }
 
 .sidebar {
-  width: 250px;
-  min-width: 250px;
-  background: #050607;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  position: fixed;
+  top: 0;
+  left: 1.5rem;
+  width: 260px;
+  max-width: calc(100vw - 3rem);
+  background: rgba(5, 6, 7, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem 1.5rem;
+  padding: 1.75rem;
+}
+
+.layout-main {
+  width: 100%;
+  margin-left: 300px;
+  padding: 0 2rem 2rem;
+  max-width: 1400px;
+  margin-right: auto;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .sidebar-header {
@@ -118,51 +114,38 @@
   transform: translateY(-2px);
 }
 
-.layout-main {
-  margin-left: 250px;
-  flex: 1;
-  padding: 2rem;
-  max-width: 1400px;
-  width: 100%;
-  margin: 0 auto;
-}
-
 .dashboard-shell {
   display: grid;
   gap: 2rem;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 @media (max-width: 1024px) {
   .sidebar {
-    position: fixed;
-    left: 0;
     top: 0;
-    bottom: 0;
+    left: 1rem;
     width: 240px;
-    z-index: 10;
+    max-width: calc(100vw - 2rem);
   }
 
   .layout-main {
-    margin-left: 240px;
-    padding: 1.5rem;
+    margin-left: 280px;
+    padding: 0 2rem 2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .layout-root {
-    flex-direction: column;
-  }
-
   .sidebar {
-    position: relative;
-    width: 100%;
-    min-width: unset;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    top: 1rem;
+    left: 1rem;
+    width: calc(100vw - 2rem);
+    padding: 1rem;
+    border-radius: 1.25rem;
   }
 
   .layout-main {
     margin-left: 0;
-    padding: 1rem;
+    padding: 0 1rem 2rem;
   }
 }

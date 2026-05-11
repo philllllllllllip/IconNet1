@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
+import SpaceParticles from './SpaceParticles';
 import './Layout.css';
 
 interface LayoutProps {
@@ -10,6 +11,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, onNavigate }) => {
   return (
     <div className="layout-root">
+      <SpaceParticles />
       <Sidebar onNavigate={onNavigate} />
       <main className="layout-main">
         <div className="dashboard-shell">
@@ -22,10 +24,3 @@ const Layout: React.FC<LayoutProps> = ({ children, onNavigate }) => {
 
 export default Layout;
 
-const img = new Image();
-img.src = './images/dashboard_background.png';
-
-img.onload = () => {
-  document.documentElement.style.setProperty('--tile-w', img.width + 'px');
-  document.documentElement.style.setProperty('--tile-h', img.height + 'px');
-};

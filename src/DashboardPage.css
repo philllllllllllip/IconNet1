@@ -1,12 +1,20 @@
 .dashboard-content {
   display: grid;
   gap: 2rem;
+  position: relative;
+}
+
+.dashboard-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .profile-card {
   display: grid;
   gap: 1.75rem;
-  background: rgba(10, 12, 18, 0.98);
+  background: rgba(10, 12, 18, 0.95);
   border-radius: 2rem;
   padding: 2.5rem;
   margin-bottom: 3rem;
@@ -14,6 +22,7 @@
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .profile-card::before {
@@ -40,11 +49,16 @@
   background: #090909;
   display: grid;
   place-items: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #ffffff;
+  overflow: hidden;
   border: 2px solid rgba(59, 130, 246, 0.45);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .profile-details {
@@ -75,6 +89,12 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.banner-subtitle {
+  color: rgba(203, 213, 225, 0.8);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
 }
 
 .account-stats {
@@ -122,49 +142,120 @@
   border-color: rgba(59, 130, 246, 0.45);
 }
 
-.stat-value-card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1.5rem;
-  padding: 1.5rem 1.75rem;
-  text-align: left;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+.icon-selection-panel {
+  display: grid;
+  gap: 1.25rem;
+  background: rgba(7, 13, 28, 0.96);
+  border-radius: 2rem;
+  padding: 2rem;
+  border: 1px solid rgba(59, 130, 246, 0.16);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.45);
   position: relative;
-  overflow: hidden;
+  z-index: 1;
 }
 
-.stat-value-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #2563eb, transparent);
+.selection-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.stat-value-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 60px rgba(37, 99, 235, 0.18);
-  border-color: rgba(59, 130, 246, 0.4);
+.selection-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
-.stat-value-card span {
-  display: block;
-  color: #cbd5e1;
-  margin-bottom: 0.75rem;
+.selection-header p {
+  margin: 0.5rem 0 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.selection-message {
+  color: #a5f3fc;
   font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  line-height: 1.4;
 }
 
-.stat-value-card strong {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #ffffff;
+.owned-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.icon-choice-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  text-align: left;
+  display: grid;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  color: #f8fafc;
+}
+
+.icon-choice-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.18);
+  border-color: rgba(59, 130, 246, 0.32);
+}
+
+.icon-choice-card.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.icon-choice-card.selected {
+  border-color: #60a5fa;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.25);
+}
+
+.icon-choice-preview {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #05080f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  place-items: center;
+}
+
+.icon-choice-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icon-choice-meta {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.icon-choice-meta strong {
   display: block;
-  line-height: 1.1;
+  font-size: 1rem;
+}
+
+.icon-choice-meta span {
+  color: rgba(203, 213, 225, 0.72);
+  font-size: 0.9rem;
+}
+
+.icon-choice-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(96, 165, 250, 0.18);
+  color: #bfdbfe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
@@ -182,12 +273,7 @@
     width: 100%;
   }
 
-  .coin-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .coin-row p {
-    font-size: 2rem;
+  .stats-row {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,14 @@
+{
+  "icons": [
+    {
+      "id": "icon-1",
+      "name": "IconNet",
+      "rarity": "legendary",
+      "dropChance": 0,
+      "circulation": 0,
+      "maxSupply": null,
+      "series": "None",
+      "case": "Foundation"
+    }
+  ]
+}

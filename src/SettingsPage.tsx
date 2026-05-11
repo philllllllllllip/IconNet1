@@ -35,7 +35,7 @@ const SettingsPage: React.FC = () => {
           </div>
 
           <div className="settings-note">
-            <p>This page is a placeholder for your account settings, theme options, and security preferences.</p>
+            <p></p>
           </div>
         </div>
       </section>

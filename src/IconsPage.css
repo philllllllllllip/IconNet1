@@ -1,0 +1,108 @@
+.icons-page {
+  color: #f6f8ff;
+  padding: 0 2rem 2rem;
+}
+
+.icons-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.icons-header h1 {
+  margin: 0;
+  font-size: 2.25rem;
+}
+
+.icons-header p {
+  margin: 0.75rem 0 0;
+  max-width: 48rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.icons-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 220px;
+  text-align: right;
+}
+
+.icons-summary span {
+  background: rgba(15, 23, 42, 0.85);
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.icons-loading {
+  padding: 1rem 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.icons-series-panel {
+  margin-bottom: 2rem;
+  background: rgba(5, 10, 25, 0.85);
+  border: 1px solid rgba(59, 130, 246, 0.24);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+}
+
+.icons-series-panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.icons-series-case {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.icons-table-wrapper {
+  overflow-x: auto;
+}
+
+.icons-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.icons-table th,
+.icons-table td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.icons-table th {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.icon-preview {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 1.25rem;
+  background: #020617;
+  overflow: hidden;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.icon-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.icon-row.unlocked td {
+  color: #e5e7eb;
+}

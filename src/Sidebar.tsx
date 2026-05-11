@@ -17,6 +17,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
             <i className="fas fa-tachometer-alt" />
             <span>Dashboard</span>
           </button>
+          <button className="sidebar-button" onClick={() => onNavigate('/icons')}>
+            <i className="fas fa-th" />
+            <span>Icons</span>
+          </button>
+          <button className="sidebar-button" onClick={() => onNavigate('/market')}>
+            <i className="fas fa-store" />
+            <span>Market</span>
+          </button>
           <button className="sidebar-button" onClick={() => onNavigate('/settings')}>
             <i className="fas fa-cog" />
             <span>Settings</span>

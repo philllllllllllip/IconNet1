@@ -3,7 +3,9 @@ import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
 import DashboardPage from './DashboardPage';
+import MarketPage from './MarketPage';
 import SettingsPage from './SettingsPage';
+import IconsPage from './IconsPage';
 import NotFoundPage from './NotFoundPage';
 import Layout from './Layout';
 import { useAuth } from './AuthContext';
@@ -50,6 +52,30 @@ const App: React.FC = () => {
     return (
       <Layout onNavigate={handleNavigate}>
         <DashboardPage />
+      </Layout>
+    );
+  }
+
+  if (path === '/icons') {
+    if (!user) {
+      window.location.pathname = '/login';
+      return null;
+    }
+    return (
+      <Layout onNavigate={handleNavigate}>
+        <IconsPage />
+      </Layout>
+    );
+  }
+
+  if (path === '/market') {
+    if (!user) {
+      window.location.pathname = '/login';
+      return null;
+    }
+    return (
+      <Layout onNavigate={handleNavigate}>
+        <MarketPage />
       </Layout>
     );
   }

@@ -13,8 +13,10 @@ interface AuthContextType {
   role: string | null;
   token: string | null;
   stats: UserStats;
+  selectedIconId: string;
   login: (username: string, password: string) => Promise<void>;
   signup: (username: string, password: string) => Promise<void>;
+  selectIcon: (iconId: string) => Promise<void>;
   logout: () => void;
   loading: boolean;
 }
@@ -36,6 +38,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [role, setRole] = useState<string | null>(null);
   const [stats, setStats] = useState<UserStats>(defaultStats);
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  const [selectedIconId, setSelectedIconId] = useState<string>('icon-1');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -50,6 +53,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             const data = await res.json();
             setUser(data.username);
             setRole(data.role || 'Player');
+            setSelectedIconId(data.selectedIconId || 'icon-1');
             setStats(data.stats || defaultStats);
             setToken(storedToken);
           } else {
@@ -95,6 +99,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setToken(data.token);
     setUser(data.username);
     setRole(data.role || 'Player');
+    setSelectedIconId(data.selectedIconId || 'icon-1');
     setStats(data.stats || defaultStats);
   };
 
@@ -120,7 +125,31 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setToken(data.token);
     setUser(data.username);
     setRole(data.role || 'Player');
+    setSelectedIconId(data.selectedIconId || 'icon-1');
     setStats(data.stats || defaultStats);
+  };
+
+  const selectIcon = async (iconId: string) => {
+    if (!token) {
+      throw new Error('Not authenticated');
+    }
+
+    const res = await fetch('http://localhost:5000/api/market/select-icon', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ iconId })
+    });
+
+    if (!res.ok) {
+      const payload = await res.json();
+      throw new Error(payload.error || 'Could not select icon');
+    }
+
+    const data = await res.json();
+    setSelectedIconId(data.selectedIconId || 'icon-1');
   };
 
   const logout = () => {
@@ -128,11 +157,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setToken(null);
     setUser(null);
     setRole(null);
+    setSelectedIconId('icon-1');
     setStats(defaultStats);
   };
 
   return (
-    <AuthContext.Provider value={{ user, role, token, stats, login, signup, logout, loading }}>
+    <AuthContext.Provider value={{ user, role, token, stats, selectedIconId, login, signup, selectIcon, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
